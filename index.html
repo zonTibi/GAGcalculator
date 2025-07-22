@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roblox Grow a Garden Profit Calculator</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f4f8; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .container { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 400px; width: 100%; }
+    h1 { font-size: 1.25rem; text-align: center; margin-bottom: 1rem; }
+    label { display: block; margin-top: 1rem; font-size: 0.9rem; }
+    input, select { width: 100%; padding: 0.5rem; font-size: 1rem; border: 1px solid #ccc; border-radius: 0.5rem; margin-top: 0.25rem; }
+    button { width: 100%; padding: 0.75rem; font-size: 1rem; margin-top: 1rem; background: #3b82f6; color: white; border: none; border-radius: 0.5rem; cursor: pointer; }
+    button:hover { background: #2563eb; }
+    .result { margin-top: 1rem; font-size: 1rem; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Grow a Garden Profit Calculator</h1>
+    <label for="plant">Select Plant:</label>
+    <select id="plant">
+      <option value="10">Carrot (₱10/kg)</option>
+      <option value="15">Tomato (₱15/kg)</option>
+      <option value="20">Lettuce (₱20/kg)</option>
+    </select>
+
+    <label for="weight">Enter Weight (kg):</label>
+    <input type="number" id="weight" placeholder="e.g., 5" />
+
+    <label for="fertilizer">Fertilizer Cost (₱):</label>
+    <input type="number" id="fertilizer" placeholder="e.g., 20" />
+
+    <button onclick="calculateProfit()">Calculate Profit</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateProfit() {
+      const pricePerKg = parseFloat(document.getElementById('plant').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const fertilizer = parseFloat(document.getElementById('fertilizer').value);
+
+      if (isNaN(weight) || isNaN(fertilizer)) {
+        document.getElementById('result').innerText = 'Please enter valid weight and fertilizer cost.';
+        return;
+      }
+
+      const grossPrice = pricePerKg * weight;
+      const netProfit = grossPrice - fertilizer;
+
+      document.getElementById('result').innerText = `Gross Price: ₱${grossPrice.toFixed(2)} | Net Profit: ₱${netProfit.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
